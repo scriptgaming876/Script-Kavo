@@ -1,0 +1,98 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("PLAYER", "LightTheme")
+local Tab = Window:NewTab("Local")
+local Section = Tab:NewSection("Player")
+Section:NewSlider("Walkspeed", "SliderInfo", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+
+Section:NewSlider("JUMP BOOST", "SliderInfo", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.Jump = s
+end)
+
+Section:NewLabel("Hub game Universal")
+Section:NewButton("Keyboard", "ButtonInfo", function()
+    print("Clicked")
+end)
+
+Section:NewButton("mouse/cursor", "ButtonInfo", function()
+    print("Clicked")
+end)
+
+Section:NewButton("shift lock", "ButtonInfo", function()
+    print("Clicked")
+end)
+
+Section:NewButton("Hitbox", "ButtonInfo", function()
+    print("Clicked")
+end)
+
+label:UpdateLabel("Misc")
+Section:NewButton("Noclip", "ButtonInfo", function()
+    print("Clicked")
+end)
+
+Section:NewButton("Delete Door Blue", "ButtonInfo", function()
+    print("Clicked")
+end)
+
+Section:NewButton("Rtx Ultra", "ButtonInfo", function()
+    print("Clicked")
+end)
+
+Section:NewButton("Fullbright", "ButtonInfo", function()
+    print("Clicked")
+end)
+
+Section:NewButton("XRAY", "ButtonInfo", function()
+    print("Clicked")
+end)
+
+Section:NewLabel("ESP")
+Section:NewToggle("ESP PLAYER", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("ESP MONSTER", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("ESP NAME", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("ESP BOX", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("ESP DISTANCE", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("ESP ENABLE", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
