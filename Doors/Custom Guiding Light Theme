@@ -1,0 +1,22 @@
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+local player = game.Players.LocalPlayer
+
+-- Create a Part to attach the light to
+local guidingPart = Instance.new("Part")
+guidingPart.Size = Vector3.new(1,1,1)
+guidingPart.Position = player.Character.HumanoidRootPart.Position + Vector3.new(0, 5, 0)
+guidingPart.Anchored = true
+guidingPart.CanCollide = false
+guidingPart.Transparency = 1
+guidingPart.Parent = Workspace
+
+-- Create the Light
+local light = Instance.new("PointLight")
+light.Color = Color3.fromRGB(0, 255, 255) -- Bright Cyan color (customize it!)
+light.Brightness = 10 -- Higher = brighter
+light.Range = 20 -- How far it lights up
+light.Shadows = true
+light.Parent = guidingPart
+
+print("Custom Guiding Light Created!")
