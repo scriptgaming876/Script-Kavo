@@ -1,0 +1,22 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+local function findBonds()
+    for _, bond in pairs(workspace:GetDescendants()) do
+        if bond.Name == "Bond" and bond:IsA("ProximityPrompt") then
+            local distance = (humanoidRootPart.Position - bond.Parent.Position).Magnitude
+            if distance <= 10 then -- Only if close enough
+                fireproximityprompt(bond)
+            end
+        end
+    end
+end
+
+-- Auto collect loop
+while true do
+    pcall(function()
+        findBonds()
+    end)
+    wait(0.5) -- Check every 0.5 seconds
+end
