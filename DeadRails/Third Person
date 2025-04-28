@@ -1,0 +1,16 @@
+local player = game.Players.LocalPlayer
+local camera = workspace.CurrentCamera
+
+-- Force third-person settings
+player.CameraMaxZoomDistance = 10 -- Set how far they can zoom out
+player.CameraMinZoomDistance = 5  -- Prevent zooming in to first person
+player.CameraMode = Enum.CameraMode.Classic -- Ensure free third-person view
+
+-- Constantly reapply to prevent changes
+while task.wait(1) do
+    pcall(function()
+        player.CameraMaxZoomDistance = 10
+        player.CameraMinZoomDistance = 5
+        player.CameraMode = Enum.CameraMode.Classic
+    end)
+end
