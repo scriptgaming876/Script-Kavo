@@ -1,0 +1,31 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+local function collectNearbyLoot()
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("ProximityPrompt") and (obj.Parent.Name == "Bond" or obj.Parent.Name == "CashDrop" or obj.Parent.Name == "Gold") then
+            local distance = (humanoidRootPart.Position - obj.Parent.Position).Magnitude
+            if distance <= 10 then
+                fireproximityprompt(obj)
+            end
+        end
+    end
+end
+
+local function moveToEscape()
+    for _, escape in pairs(workspace:GetDescendants()) do
+        if escape.Name:lower():find("escape") and escape:IsA("Part") then
+            -- Move slowly toward escape
+            humanoidRootPart.CFrame = humanoidRootPart.CFrame:Lerp(CFrame.new(escape.Position + Vector3.new(0, 3, 0)), 0.05)
+        end
+    end
+end
+
+-- Main Auto-Win Loop
+while task.wait(1) do
+    pcall(function()
+        collectNearbyLoot()
+        moveToEscape()
+    end)
+end
