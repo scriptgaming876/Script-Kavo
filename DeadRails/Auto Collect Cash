@@ -1,0 +1,38 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local hrp = character:WaitForChild("HumanoidRootPart")
+
+-- Settings
+local pickupRange = 30 -- how close you teleport to items (can tweak if needed)
+
+-- Function to teleport slightly above item
+local function collectItem(item)
+    if item:IsA("Part") or item:IsA("MeshPart") then
+        hrp.CFrame = item.CFrame + Vector3.new(0, 3, 0)
+        firetouchinterest(hrp, item, 0)
+        task.wait(0.1)
+        firetouchinterest(hrp, item, 1)
+    elseif item:IsA("Model") and item:FindFirstChild("PrimaryPart") then
+        hrp.CFrame = item.PrimaryPart.CFrame + Vector3.new(0, 3, 0)
+        firetouchinterest(hrp, item.PrimaryPart, 0)
+        task.wait(0.1)
+        firetouchinterest(hrp, item.PrimaryPart, 1)
+    end
+end
+
+-- Main loop
+task.spawn(function()
+    while task.wait(0.5) do
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:IsA("Part") or item:IsA("MeshPart") or item:IsA("Model") then
+                if item.Name:lower():find("cash") or item.Name:lower():find("money") or item.Name:lower():find("bond") or item.Name:lower():find("gold") then
+                    local targetPos = item:IsA("Model") and (item.PrimaryPart and item.PrimaryPart.Position) or item.Position
+                    if targetPos and (hrp.Position - targetPos).Magnitude <= 100 then -- 100 studs limit
+                        collectItem(item)
+                        task.wait(0.2) -- small delay between pickups
+                    end
+                end
+            end
+        end
+    end
+end)
