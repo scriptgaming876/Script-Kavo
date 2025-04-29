@@ -1,0 +1,61 @@
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local hum = char:WaitForChild("HumanoidRootPart")
+
+-- SET your estimated WalkSpeed (change if you have buffs)
+local walkspeed = 16 -- Default Roblox walk speed
+
+-- Function to create a BillboardGui at the checkpoint
+local function createCheckpointESP(target)
+    local esp = Instance.new("BillboardGui", target)
+    esp.Adornee = target
+    esp.Size = UDim2.new(4, 0, 2, 0)
+    esp.AlwaysOnTop = true
+    esp.Name = "CheckpointESP"
+
+    local label = Instance.new("TextLabel", esp)
+    label.Size = UDim2.new(1, 0, 1, 0)
+    label.BackgroundTransparency = 1
+    label.Text = "Loading..."
+    label.TextColor3 = Color3.fromRGB(255, 255, 0)
+    label.TextStrokeTransparency = 0
+    label.Font = Enum.Font.SourceSansBold
+    label.TextScaled = true
+end
+
+-- Function to update the text
+local function updateCheckpointESP(target)
+    local gui = target:FindFirstChild("CheckpointESP")
+    if gui then
+        local label = gui:FindFirstChildOfClass("TextLabel")
+        if label then
+            local distance = (hum.Position - target.Position).Magnitude
+            local timeToReach = math.floor(distance / walkspeed)
+            label.Text = "Distance: "..math.floor(distance).." studs\nETA: "..timeToReach.."s"
+        end
+    end
+end
+
+-- Main Logic
+local function setupCheckpointESP()
+    for _, checkpoint in pairs(workspace:GetDescendants()) do
+        if checkpoint:IsA("Part") or checkpoint:IsA("MeshPart") then
+            if checkpoint.Name:lower():find("checkpoint") or checkpoint.Name:lower():find("mtr") then
+                if not checkpoint:FindFirstChild("CheckpointESP") then
+                    createCheckpointESP(checkpoint)
+                end
+
+                -- Update the ESP info constantly
+                task.spawn(function()
+                    while task.wait(0.5) do
+                        pcall(function()
+                            updateCheckpointESP(checkpoint)
+                        end)
+                    end
+                end)
+            end
+        end
+    end
+end
+
+setupCheckpointESP()
