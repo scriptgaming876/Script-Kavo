@@ -1,0 +1,36 @@
+local function createItemESP(target, color)
+    local esp = Instance.new("BillboardGui", target)
+    esp.Adornee = target
+    esp.Size = UDim2.new(4, 0, 1, 0)
+    esp.AlwaysOnTop = true
+
+    local label = Instance.new("TextLabel", esp)
+    label.Size = UDim2.new(1, 0, 1, 0)
+    label.BackgroundTransparency = 1
+    label.Text = target.Name
+    label.TextColor3 = color
+    label.TextStrokeTransparency = 0
+    label.Font = Enum.Font.SourceSansBold
+    label.TextScaled = true
+end
+
+local function itemsESP()
+    local itemNames = { "Bond", "Gold", "CashDrop", "Artifact", "Key", "MoneyBag" }
+    
+    while task.wait(1) do
+        for _, item in pairs(workspace:GetDescendants()) do
+            if item:IsA("Part") or item:IsA("MeshPart") or item:IsA("Model") then
+                for _, name in pairs(itemNames) do
+                    if item.Name:lower():find(name:lower()) then
+                        local part = item:IsA("Model") and (item.PrimaryPart or item:FindFirstChild("HumanoidRootPart")) or item
+                        if part and not part:FindFirstChildOfClass("BillboardGui") then
+                            createItemESP(part, Color3.fromRGB(0, 255, 255)) -- Cyan color for items
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+
+itemsESP()
