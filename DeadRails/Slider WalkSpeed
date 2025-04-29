@@ -1,0 +1,4 @@
+if humanoid then
+        humanoid.WalkSpeed = s
+    end
+end)
