@@ -1,0 +1,75 @@
+local uis = game:GetService("UserInputService")
+local rs = game:GetService("RunService")
+local cam = workspace.CurrentCamera
+local plr = game.Players.LocalPlayer
+
+-- Freecam variables
+local flying = false
+local speed = 2
+local fastSpeed = 8
+local camPos, camRot = Vector3.new(), Vector2.new()
+local movement = { w = 0, a = 0, s = 0, d = 0, q = 0, e = 0 }
+
+-- Input handler
+uis.InputBegan:Connect(function(i, g)
+    if g then return end
+    local key = i.KeyCode
+    if key == Enum.KeyCode.F then
+        flying = not flying
+        if flying then
+            cam.CameraType = Enum.CameraType.Scriptable
+            camPos = cam.CFrame.Position
+            camRot = Vector2.new(cam.CFrame:ToEulerAnglesYXZ())
+        else
+            cam.CameraType = Enum.CameraType.Custom
+        end
+    elseif key == Enum.KeyCode.LeftShift then
+        speed = fastSpeed
+    elseif key == Enum.KeyCode.W then movement.w = 1
+    elseif key == Enum.KeyCode.A then movement.a = 1
+    elseif key == Enum.KeyCode.S then movement.s = 1
+    elseif key == Enum.KeyCode.D then movement.d = 1
+    elseif key == Enum.KeyCode.Q then movement.q = 1
+    elseif key == Enum.KeyCode.E then movement.e = 1
+    end
+end)
+
+uis.InputEnded:Connect(function(i, g)
+    if g then return end
+    local key = i.KeyCode
+    if key == Enum.KeyCode.LeftShift then
+        speed = 2
+    elseif key == Enum.KeyCode.W then movement.w = 0
+    elseif key == Enum.KeyCode.A then movement.a = 0
+    elseif key == Enum.KeyCode.S then movement.s = 0
+    elseif key == Enum.KeyCode.D then movement.d = 0
+    elseif key == Enum.KeyCode.Q then movement.q = 0
+    elseif key == Enum.KeyCode.E then movement.e = 0
+    end
+end)
+
+-- Mouse rotation
+local lastMousePos = uis:GetMouseLocation()
+uis.InputChanged:Connect(function(i)
+    if flying and uis:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) and i.UserInputType == Enum.UserInputType.MouseMovement then
+        local delta = uis:GetMouseLocation() - lastMousePos
+        camRot = camRot + Vector2.new(-delta.Y, -delta.X) * 0.002
+        lastMousePos = uis:GetMouseLocation()
+    end
+end)
+
+-- Camera loop
+rs.RenderStepped:Connect(function(dt)
+    if flying then
+        local moveDir = Vector3.new(
+            movement.d - movement.a,
+            movement.e - movement.q,
+            movement.s - movement.w
+        )
+
+        local camCF = CFrame.new(camPos)
+        camCF = camCF * CFrame.Angles(0, camRot.Y, 0) * CFrame.Angles(camRot.X, 0, 0)
+        cam.CFrame = camCF
+        camPos = camPos + camCF:VectorToWorldSpace(moveDir) * speed
+    end
+end)
