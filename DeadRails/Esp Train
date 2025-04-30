@@ -1,0 +1,39 @@
+local function createESP(target, labelText)
+    if target:FindFirstChild("TrainESP") then return end
+
+    local esp = Instance.new("BillboardGui")
+    esp.Name = "TrainESP"
+    esp.Adornee = target
+    esp.Size = UDim2.new(5, 0, 1, 0)
+    esp.AlwaysOnTop = true
+    esp.Parent = target
+
+    local textLabel = Instance.new("TextLabel", esp)
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.BackgroundTransparency = 1
+    textLabel.Text = labelText or "Train"
+    textLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
+    textLabel.TextStrokeTransparency = 0
+    textLabel.Font = Enum.Font.GothamBold
+    textLabel.TextScaled = true
+end
+
+-- Look for trains
+for _, model in pairs(workspace:GetChildren()) do
+    if model:IsA("Model") and model:FindFirstChild("Engine") and model.Name:lower():find("train") then
+        local part = model:FindFirstChild("Engine") or model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+        if part then
+            createESP(part, "TRAIN")
+        end
+    end
+end
+
+-- Auto update ESP for any new trains
+workspace.ChildAdded:Connect(function(obj)
+    if obj:IsA("Model") and obj:FindFirstChild("Engine") and obj.Name:lower():find("train") then
+        local part = obj:FindFirstChild("Engine") or obj.PrimaryPart or obj:FindFirstChildWhichIsA("BasePart")
+        if part then
+            createESP(part, "TRAIN")
+        end
+    end
+end)
