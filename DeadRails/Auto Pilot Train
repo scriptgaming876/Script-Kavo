@@ -1,0 +1,31 @@
+local player = game.Players.LocalPlayer
+local trainModel = nil
+
+-- Try to find the player's train model
+for _, v in pairs(workspace:GetChildren()) do
+    if v:IsA("Model") and v:FindFirstChild("Engine") and v:FindFirstChildWhichIsA("VehicleSeat") then
+        if v:FindFirstChildWhichIsA("VehicleSeat").Occupant == player.Character:FindFirstChildOfClass("Humanoid") then
+            trainModel = v
+            break
+        end
+    end
+end
+
+if not trainModel then
+    warn("Train not found or not currently driving.")
+    return
+end
+
+local seat = trainModel:FindFirstChildWhichIsA("VehicleSeat")
+
+-- Auto pilot loop
+task.spawn(function()
+    while task.wait(0.1) do
+        if seat and seat:IsDescendantOf(workspace) then
+            seat.Throttle = 1 -- Full speed ahead
+            seat.Steer = 0 -- Go straight
+        end
+    end
+end)
+
+print("Auto pilot: Train is now moving forward automatically.")
