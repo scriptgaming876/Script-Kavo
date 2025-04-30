@@ -1,0 +1,16 @@
+local plr = game.Players.LocalPlayer
+local char = plr.Character or plr.CharacterAdded:Wait()
+local noclip = false
+
+-- Toggle on/off with "N" key
+game:GetService("UserInputService").InputBegan:Connect(function(input, processed)
+    if processed then return end
+    if input.KeyCode == Enum.KeyCode.N then
+        noclip = not noclip
+        if noclip then
+            print("Noclip: ON")
+        else
+            print("Noclip: OFF")
+        end
+    end
+end)
