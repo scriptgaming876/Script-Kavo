@@ -1,0 +1,76 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZeianRussell/Kavo-UI-Library/main/Movable.source.lua"))()
+local Window = Library.CreateLib("Dead Rails Hubs", "DarkTheme")
+local Tab = Window:NewTab("Player")
+local Section = Tab:NewSection("Player Hubs")
+Section:NewSlider("WalkSpeed", "Walkspeed", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+if humanoid then
+        humanoid.WalkSpeed = s
+    end
+end)
+end)
+
+Section:NewButton("Noclip", "Wall Hack", function()
+    print("Executed Noclip")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Noclip"))()
+end)
+
+Section:NewButton("Third Person", "ButtonInfo", function()
+    print("Executed Third Person")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Third%20Person"))()
+end)
+
+Section:NewButton("Free Cam", "Free Cam", function()
+    print("Free Cam")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Free%20Cam"))()
+end)
+
+local Tab = Window:NewTab("Misc")
+local Section = Tab:NewSection("Misc Player")
+Section:NewButton("Auto Bonds", "Bonds", function()
+    print("Executed Bonds")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/AUTO%20BONDS"))()
+end)
+
+Section:NewButton("Auto Collect Money", "ButtonInfo", function()
+    print("Executed Money")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Auto%20Collect%20Cash"))()
+end)
+
+Section:NewButton("Auto Wins", "Auto Escape", function()
+    print("Executed Wins")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Auto%20Wins"))()
+end)
+
+local Tab = Window:NewTab("Visual")
+local Section = Tab:NewSection("Esp")
+Section:NewButton("ESP ZOMBIE", "ButtonInfo", function()
+    print("Esp Zombie")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Esp%20Zombie%20For%20DeadRails"))()
+end)
+
+Section:NewButton("esp items", "ButtonInfo", function()
+    print("Executed Esp Items")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Esp%20Items"))()
+end)
+
+Section:NewButton("Esp WereWolf", "ButtonInfo", function()
+    print("Executed Esp WereWolf")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Esp%20WereWolf"))()
+end)
+
+Section:NewButton("Esp WereWolf King", "ButtonInfo", function()
+    print("Executed Esp Werewolf King")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Esp%20WereWolf%20King"))()
+end)
+
+Section:NewButton("Esp Vampire", "ButtonInfo", function()
+    print("Executed Esp Vampire")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Esp%20Vampire"))()
+end)
+
+local Tab = Window:NewTab("Train")
+local Section = Tab:NewSection("Train")
+Section:NewButton("Auto Pilot Train", "ButtonInfo", function()
+    print("Executed Auto Train")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/DeadRails/Auto%20Pilot%20Train"))()
+end)
