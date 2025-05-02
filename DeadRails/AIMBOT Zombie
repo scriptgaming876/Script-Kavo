@@ -1,0 +1,17 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Camera = workspace.CurrentCamera
+local LocalPlayer = Players.LocalPlayer
+
+-- Settings
+local aimPart = "Head" -- Part of zombie to aim at
+local aimRadius = 200 -- Max distance from mouse to snap (in pixels)
+local enabled = true
+
+-- Function to find closest zombie
+local function getClosestZombie()
+    local closest
+    local shortestDistance = aimRadius
+
+    for _, npc in pairs(workspace:GetDescendants()) do
+        if npc:IsA("Model") and npc:FindFirstChild(aimPart) and npc.Name:lower():
