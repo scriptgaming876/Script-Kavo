@@ -1,0 +1,36 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Camera = workspace.CurrentCamera
+local LocalPlayer = Players.LocalPlayer
+local Mouse = LocalPlayer:GetMouse()
+local aimPart = "Head" -- The part of the Vampire to aim at
+local aimRadius = 250 -- Radius from mouse in pixels
+local enabled = true
+local function getClosestVampire()
+    local closest
+    local shortestDistance = aimRadius
+
+    for _, npc in pairs(workspace:GetDescendants()) do
+        if npc:IsA("Model") and npc:FindFirstChild(aimPart) and npc.Name:lower():find("vampire") then
+            local part = npc[aimPart]
+            local pos, onScreen = Camera:WorldToViewportPoint(part.Position)
+            if onScreen then
+                local dist = (Vector2.new(pos.X, pos.Y) - Vector2.new(Mouse.X, Mouse.Y)).Magnitude
+                if dist < shortestDistance then
+                    shortestDistance = dist
+                    closest = part
+                end
+            end
+        end
+    end
+
+    return closest
+end
+
+RunService.RenderStepped:Connect(function()
+    if not enabled then return end
+    local target = getClosestVampire()
+    if target then
+        Camera.CFrame = CFrame.new(Camera.CFrame.Position, target.Position)
+    end
+end)
