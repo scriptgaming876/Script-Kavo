@@ -1,0 +1,52 @@
+local espTable = {}
+local function createESP(target, name, color)
+    local Billboard = Instance.new("BillboardGui")
+    Billboard.Name = "ESP_" .. name
+    Billboard.Adornee = target
+    Billboard.Size = UDim2.new(0, 100, 0, 20)  -- Adjust size of the ESP label
+    Billboard.StudsOffset = Vector3.new(0, 3, 0)  -- Adjust the height above the target
+    Billboard.AlwaysOnTop = true
+    Billboard.Parent = target
+    
+    local Label = Instance.new("TextLabel", Billboard)
+    Label.Size = UDim2.new(1, 0, 1, 0)
+    Label.Text = name
+    Label.TextColor3 = color  -- Color for the ESP label
+    Label.BackgroundTransparency = 1
+    Label.TextScaled = true
+    table.insert(espTable, {
+        Target = target,
+        ESP = Billboard
+    })
+end
+
+local function updateEntitiesESP()
+    for _, entity in pairs(workspace:GetDescendants()) do
+        -- List of entities you want to track in the ESP
+        local entityNames = {
+            "Rush", "Ambush", "Screech", "Figure", "Eyes", "Seek", "Halt", "Snare"
+        }
+
+        -- If the entity name matches one of the listed entities and has a HumanoidRootPart
+        for _, name in ipairs(entityNames) do
+            if entity.Name == name and entity:IsA("Model") and entity:FindFirstChild("HumanoidRootPart") then
+                -- If ESP doesn't already exist, create it
+                local exists = false
+                for _, v in pairs(espTable) do
+                    if v.Target == entity.HumanoidRootPart then
+                        exists = true
+                        break
+                    end
+                end
+
+                if not exists then
+                    createESP(entity.HumanoidRootPart, name, Color3.fromRGB(255, 0, 0))  -- Red color for ESP
+                end
+            end
+        end
+    end
+end
+
+    updateEntitiesESP()
+    wait(1)  -- Update every 1 second
+end
