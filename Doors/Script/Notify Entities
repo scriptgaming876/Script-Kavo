@@ -1,0 +1,7 @@
+game.StarterGui:SetCore("SendNotification", {
+            Title = "Entity Arlert Kavo Ui",
+            Text = entityName .. " has spawned!",
+            Duration = 2
+        })
+        wait(2)
+    end
