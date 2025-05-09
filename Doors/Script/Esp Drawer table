@@ -1,0 +1,28 @@
+local espTable = {}
+local function createESP(target, name, color)
+    local Billboard = Instance.new("BillboardGui")
+    Billboard.Name = "ESP_" .. name
+    Billboard.Adornee = target
+    Billboard.Size = UDim2.new(0, 100, 0, 20)
+    Billboard.StudsOffset = Vector3.new(0, 3, 0)
+    Billboard.AlwaysOnTop = true
+    Billboard.Parent = target
+
+    local Label = Instance.new("TextLabel", Billboard)
+    Label.Size = UDim2.new(1, 0, 1, 0)
+    Label.Text = name
+    Label.TextColor3 = color
+    Label.BackgroundTransparency = 1
+    Label.TextScaled = true
+
+    espTable[#espTable + 1] = {
+        Target = target,
+        ESP = Billboard
+    }
+end
+
+for _, v in pairs(workspace:GetDescendants()) do
+    if v.Name == "Rush" and v:IsA("Model") and v:FindFirstChild("HumanoidRootPart") then
+        createESP(v.HumanoidRootPart, "Rush", Color3.fromRGB(255, 0, 0))
+    end
+end
