@@ -1,0 +1,13 @@
+local lighting = game:GetService("Lighting")
+lighting.FogEnabled = false
+lighting.FogStart = 0
+lighting.FogEnd = 100000
+game:GetService("RunService").RenderStepped:Connect(function()
+    lighting.FogEnabled = false
+    lighting.FogStart = 0
+    lighting.FogEnd = 100000
+end)
+
+lighting.Ambient = Color3.fromRGB(255, 255, 255)
+lighting.Brightness = 2
+lighting.ClockTime = 12
