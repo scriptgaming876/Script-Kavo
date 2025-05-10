@@ -1,0 +1,9 @@
+local RunService = game:GetService("RunService")
+
+RunService.RenderStepped:Connect(function()
+    for _, v in pairs(workspace:GetDescendants())
+        if v.Name == "Screech" and v:IsA("Model")
+            v:Destroy()
+        end
+    end
+end)
