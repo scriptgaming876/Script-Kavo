@@ -1,0 +1,15 @@
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local function lootNearby()
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("ProximityPrompt") and obj.Enabled and (obj.MaxActivationDistance or 10) > 0 then
+            pcall(function()
+                fireproximityprompt(obj)
+            end)
+        end
+    end
+end
+
+while task.wait(1) do
+    lootNearby()
+end
