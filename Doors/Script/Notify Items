@@ -1,0 +1,22 @@
+local StarterGui = game:GetService("StarterGui")
+local itemKeywords = {
+    "Vitamin", "Lighter", "Lockpick", "Bandage", "Gold", "Key", "Crucifix", "Flashlight"
+}
+
+local notified = {}
+while task.wait(1) do
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("Tool") or obj:IsA("Model") or obj:IsA("Part") then
+            for _, keyword in ipairs(itemKeywords) do
+                if string.find(obj.Name:lower(), keyword:lower()) and not notified[obj] then
+                    notified[obj] = true
+                    StarterGui:SetCore("SendNotification", {
+                        Title = "Item Spawner Found The Rooms",
+                        Text = "Found: " .. obj.Name,
+                        Duration = 3
+                    })
+                end
+            end
+        end
+    end
+end
