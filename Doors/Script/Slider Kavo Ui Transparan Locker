@@ -1,0 +1,11 @@
+local function setLockerTransparency(value)
+    for _, locker in pairs(workspace:GetDescendants()) do
+        if locker:IsA("Model") and locker.Name:lower():find("locker") then
+            for _, part in pairs(locker:GetDescendants()) do
+                if part:IsA("BasePart") then
+                    part.Transparency = value
+                end
+            end
+        end
+    end
+end
