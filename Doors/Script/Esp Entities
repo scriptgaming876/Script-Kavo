@@ -3,8 +3,8 @@ local function createESP(target, name, color)
     local Billboard = Instance.new("BillboardGui")
     Billboard.Name = "ESP_" .. name
     Billboard.Adornee = target
-    Billboard.Size = UDim2.new(0, 100, 0, 20)  -- Adjust size of the ESP label
-    Billboard.StudsOffset = Vector3.new(0, 3, 0)  -- Adjust the height above the target
+    Billboard.Size = UDim2.new(0, 100, 0, 20)
+    Billboard.StudsOffset = Vector3.new(0, 3, 0)
     Billboard.AlwaysOnTop = true
     Billboard.Parent = target
     
