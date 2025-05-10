@@ -3,7 +3,6 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local player = game.Players.LocalPlayer
 local char = player.Character or player.CharacterAdded:Wait()
 local function disableCutscenes()
-    -- Disable any camera changes (like those during cutscenes)
     local camera = game.Workspace.CurrentCamera
     if camera then
         camera.CameraType = Enum.CameraType.Custom
