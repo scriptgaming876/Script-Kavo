@@ -1,0 +1,34 @@
+local guidingLightESPTable = {}
+local function createGuidingLightESP(part)
+    if part:FindFirstChild("GuidingESP")
+
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "GuidingESP"
+    billboard.Adornee = part
+    billboard.Size = UDim2.new(0, 100, 0, 20)
+    billboard.StudsOffset = Vector3.new(0, 3, 0)
+    billboard.AlwaysOnTop = true
+    billboard.Parent = part
+
+    local label = Instance.new("TextLabel", billboard)
+    label.Size = UDim2.new(1, 0, 1, 0)
+    label.Text = "Guiding Light"
+    label.BackgroundTransparency = 1
+    label.TextColor3 = Color3.fromRGB(85, 170, 255)  -- Light blue
+    label.TextScaled = true
+
+    table.insert(guidingLightESPTable, {Object = part, ESP = billboard})
+end
+
+local function scanForGuidingLights()
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("BasePart") and obj.Name:lower():find("guiding") then
+            createGuidingLightESP(obj)
+        end
+    end
+end
+
+while true do
+    scanForGuidingLights()
+    wait(2)
+end
