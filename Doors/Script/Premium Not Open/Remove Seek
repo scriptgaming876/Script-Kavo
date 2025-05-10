@@ -1,0 +1,14 @@
+local StarterGui = game:GetService("StarterGui")
+
+RunService.RenderStepped:Connect(function()
+    for _, obj in pairs(workspace:GetDescendants())
+        if obj.Name == "SeekRig" and obj:IsA("Model")
+            StarterGui:SetCore("SendNotification", {
+                Title = "Seek Removed",
+                Text = "Seek was deleted before the chase.",
+                Duration = 2
+            })
+            obj:Destroy()
+        end
+    end
+end)
