@@ -1,0 +1,35 @@
+local objectiveESPTable = {}
+local function createObjectiveESP(part)
+    if part:FindFirstChild("ObjectiveESP")
+
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "ObjectiveESP"
+    billboard.Adornee = part
+    billboard.Size = UDim2.new(0, 100, 0, 20)
+    billboard.StudsOffset = Vector3.new(0, 3, 0)
+    billboard.AlwaysOnTop = true
+    billboard.Parent = part
+
+    local label = Instance.new("TextLabel")
+    label.Parent = billboard
+    label.Size = UDim2.new(1, 0, 1, 0)
+    label.BackgroundTransparency = 1
+    label.Text = "Objective"
+    label.TextColor3 = Color3.fromRGB(0, 255, 127)  -- Bright green
+    label.TextScaled = true
+
+    table.insert(objectiveESPTable, {Target = part, ESP = billboard})
+end
+
+local function scanForObjectives()
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("BasePart") and (obj.Name:lower():find("objective") or obj.Name:lower():find("key") or obj.Name:lower():find("book"))
+            createObjectiveESP(obj)
+        end
+    end
+end
+
+while true do
+    scanForObjectives()
+    wait(2)
+end
