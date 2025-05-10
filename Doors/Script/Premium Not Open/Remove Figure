@@ -1,0 +1,14 @@
+local StarterGui = game:GetService("StarterGui")
+
+RunService.RenderStepped:Connect(function()
+    for _, v in pairs(workspace:GetDescendants())
+        if v.Name == "Figure" and v:IsA("Model")
+            StarterGui:SetCore("SendNotification", {
+                Title = "Figure Removed",
+                Text = "The blind monster has been deleted.",
+                Duration = 2
+            })
+            v:Destroy()
+        end
+    end
+end)
