@@ -1,0 +1,37 @@
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local function disableCutscenes()
+    -- Disable any camera changes (like those during cutscenes)
+    local camera = game.Workspace.CurrentCamera
+    if camera then
+        camera.CameraType = Enum.CameraType.Custom
+        camera.FieldOfView = 70  -- Optional: reset camera FOV
+    end
+
+    local humanoid = char:FindFirstChild("Humanoid")
+    if humanoid then
+        humanoid.PlatformStand = false  -- Prevent platform stand in case of forced movement
+    end
+
+    local cutsceneEvent = ReplicatedStorage:FindFirstChild("CutsceneEvent")
+    if cutsceneEvent then
+        cutsceneEvent:Destroy()  -- Remove the cutscene event to prevent execution
+    end
+end
+
+RunService.RenderStepped:Connect(function()
+    disableCutscenes()
+end)
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    for _, v in pairs(getgc(true)) do
+        if typeof(v) == "function" and islclosure(v) then
+            -- Find and nullify cutscene-related functions
+            if debug.getinfo(v).name == "PlayCutscene" then
+                debug.setupvalue(v, 1, function() end)
+            end
+        end
+    end
+end)
