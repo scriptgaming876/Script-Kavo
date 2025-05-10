@@ -1,0 +1,48 @@
+local Players = game:GetService("Players")
+local workspace = game:GetService("Workspace")
+local lighting = game:GetService("Lighting")
+local runService = game:GetService("RunService")
+local player = Players.LocalPlayer
+lighting.GlobalShadows = false
+lighting.Ambient = Color3.fromRGB(255, 255, 255)
+lighting.Brightness = 2
+lighting.ClockTime = 12
+local function optimizeCollisions()
+    for _, part in pairs(workspace:GetDescendants()) do
+        if part:IsA("BasePart") and not part:IsDescendantOf(player.Character) then
+            part.CanCollide = false
+        end
+    end
+end
+
+local function cleanUp()
+    for _, object in pairs(workspace:GetDescendants()) do
+        if object:IsA("Part") and object.Name == "Shadow" then
+            object:Destroy()
+        end
+        -- Optionally remove certain effects or unnecessary models that cause lag
+        if object:IsA("ParticleEmitter") or object:IsA("Smoke") then
+            object:Destroy()
+        end
+    end
+end
+
+local function optimizeCharacter()
+    local char = player.Character
+    if char then
+        -- Disable unnecessary animations for performance
+        if char:FindFirstChild("Humanoid") then
+            char.Humanoid:LoadAnimation(nil)  -- Disables any animations
+        end
+    end
+end
+
+runService.RenderStepped:Connect(function()
+    optimizeCollisions()
+    cleanUp()
+    optimizeCharacter()
+end)
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    -- You can add any further lag-reduction tasks here, like removing debris or cleaning up after large events.
+end)
