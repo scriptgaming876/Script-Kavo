@@ -1,0 +1,150 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZeianRussell/Kavo-UI-Library/main/Movable.source.lua"))()
+local Window = Library.CreateLib("Noob Indo Hub-Bisa Di Banned Roblox", "BloodTheme")
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Main Player")
+Section:NewToggle("Auto Hide", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/Auto%20Hide.lua"))()
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("Auto Loot", "Premium", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/Premium%20Not%20Open/Auto%20Loot"))()
+    else
+        print("Toggle Off")
+local StarterGui = game:GetService("StarterGui")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local achievementEvent = ReplicatedStorage:FindFirstChild("AchievementUnlock")
+if achievementEvent and achievementEvent:IsA("RemoteEvent") then
+    achievementEvent.OnClientEvent:Connect(function(achievementName)
+        StarterGui:SetCore("SendNotification", {
+            Title = "Buy Premium Toggle Auto Loot,
+            Text = tostring(achievementName),
+            Duration = 4
+        })
+    end)
+end
+    end
+end)
+
+Section:NewToggle("Noclip", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/Noclip"))()
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewKeybind("Noclip", "KeybindInfo", Enum.KeyCode.N, function()
+	print("Executed Noclip")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/Noclip"))()
+end)
+
+Section:NewToggle("God Mode", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/God%20Mode"))()
+    else
+        print("Toggle Off")
+    end
+end)
+
+local Tab = Window:NewTab("Visual")
+local Section = Tab:NewSection("Visual Doors")
+Section:NewToggle("Esp Objective", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/Esp%20Objective"))()
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("Esp Coin", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/ESP%20COIN"))()
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("Esp Entities All", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/Esp%20Entities"))()
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("Esp Drawer", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("Esp Guiding Light", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/%20Esp%20Guiding%20Light"))()
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewLabel("Game Remote")
+Section:NewToggle("Fullbright", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/Fullbright"))()
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("Anti Fog", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/Anti%20Fog"))()
+    else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewToggle("Anti Lag", "ToggleInfo", function(state)
+    if state then
+        print("Toggle On")
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/Anti%20Lag"))()
+.   else
+        print("Toggle Off")
+    end
+end)
+
+Section:NewDropdown("Notify Entities", "DropdownInf", {"Rush", "Ambush", "Figure", "All"}, function(currentOption)
+    print(currentOption)
+end)
+
+Section:NewButton("Notify Entities", "ButtonInfo", function()
+    print("Executed Nptify")
+game.StarterGui:SetCore("SendNotification", {
+            Title = "Entity Arlert Kavo Ui",
+            Text = entityName .. " has spawned!",
+            Duration = 2
+        })
+        wait(2)
+    end
+end)
+
+Section:NewButton("Notify Items", "ButtonInfo", function()
+    print("Executed Notify Items")
+loadstring(game:HttpGet("https://raw.githubusercontent.com/scriptgaming876/Script-Kavo/refs/heads/main/Doors/Script/Notify%20Items"))()
+end)
