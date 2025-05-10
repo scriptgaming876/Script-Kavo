@@ -1,0 +1,21 @@
+local lighting = game:GetService("Lighting")
+local originalSettings = {
+    Ambient = lighting.Ambient,
+    Brightness = lighting.Brightness,
+    ClockTime = lighting.ClockTime,
+    FogEnd = lighting.FogEnd,
+    GlobalShadows = lighting.GlobalShadows
+}
+
+lighting.Ambient = Color3.new(1, 1, 1)
+lighting.Brightness = 3
+lighting.ClockTime = 12
+lighting.FogEnd = 100000
+lighting.GlobalShadows = false
+game:GetService("RunService").RenderStepped:Connect(function()
+    lighting.Ambient = Color3.new(1, 1, 1)
+    lighting.Brightness = 3
+    lighting.ClockTime = 12
+    lighting.FogEnd = 100000
+    lighting.GlobalShadows = false
+end)
