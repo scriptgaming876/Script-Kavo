@@ -21,13 +21,10 @@ local function createESP(target, name, color)
 end
 
 local function updateEntitiesESP()
-    for _, entity in pairs(workspace:GetDescendants()) do
-        -- List of entities you want to track in the ESP
+    for _, entity in pairs(workspace:GetDescendants())
         local entityNames = {
             "Rush", "Ambush", "Screech", "Figure", "Eyes", "Seek", "Halt", "Snare"
         }
-
-        -- If the entity name matches one of the listed entities and has a HumanoidRootPart
         for _, name in ipairs(entityNames) do
             if entity.Name == name and entity:IsA("Model") and entity:FindFirstChild("HumanoidRootPart") then
                 -- If ESP doesn't already exist, create it
@@ -48,5 +45,5 @@ local function updateEntitiesESP()
 end
 
     updateEntitiesESP()
-    wait(1)  -- Update every 1 second
+    wait(1)
 end
