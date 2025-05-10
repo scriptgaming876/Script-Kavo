@@ -1,0 +1,16 @@
+local RunService = game:GetService("RunService")
+local StarterGui = game:GetService("StarterGui")
+
+
+RunService.RenderStepped:Connect(function()
+    for _, v in pairs(workspace:GetDescendants())
+        if v.Name == "AmbushMoving" and v:IsA("Model")
+            StarterGui:SetCore("SendNotification", {
+                Title = "Ambush Removed",
+                Text = "Ambush was deleted before it could attack.",
+                Duration = 2
+            })
+            v:Destroy()
+        end
+    end
+end)
