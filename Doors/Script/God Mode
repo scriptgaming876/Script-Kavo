@@ -1,0 +1,32 @@
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local humanoid = char:WaitForChild("Humanoid")
+humanoid.Health = 100
+humanoid:GetPropertyChangedSignal("Health"):Connect(function()
+    if humanoid.Health < 100 then
+        humanoid.Health = 100
+    end
+end)
+
+char.DescendantAdded:Connect(function(part)
+    if part:IsA("TouchTransmitter") then
+        local parent = part.Parent
+        if parent and parent:IsA("BasePart") then
+            parent.Touched:Connect(function(hit)
+                if hit:IsDescendantOf(char) then
+                    humanoid.Health = 100
+                end
+            end)
+        end
+    end
+end)
+
+local function nullifyEntityDamage()
+    for _, v in pairs(getgc(true)) do
+        if typeof(v) == "function" and islclosure(v) and debug.getinfo(v).name == "TakeDamage" then
+            debug.setupvalue(v, 1, function() end)
+        end
+    end
+end
+
+pcall(nullifyEntityDamage)
